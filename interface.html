@@ -1,0 +1,125 @@
+<!DOCTYPE HTML>
+ <html>
+   <head>    
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+    <style>
+	body {
+		margin: 0px;
+		padding: 0px;
+        }
+	#sData{
+		float: center;
+		margin-left:auto;
+		margin-right:auto;
+		width:150px;
+	}
+	h2{
+		text-align:center;
+	}
+	#btnHolder{
+	text-align:center;
+	}
+    </style>
+        <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+	<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+	<script src="/socket.io/socket.io.js"></script>
+    <script>
+	// canvas request for all browsers
+	  
+	var iosocket;
+	var text;
+	var toggleVal = 0;
+	  	  
+	function initSocketIO()
+	{
+		iosocket = io.connect();
+		iosocket.on('onconnection', function(value) {
+		initButton();
+	    });
+	}
+	
+	function initButton()
+	{
+		 $( "#a" ).button();
+		 $( "#b" ).button();
+		 $( "#c" ).button();
+		 $( "#d" ).button();
+		 $( "#e" ).button();
+	}
+	
+	
+	window.onload = function() {
+	     initSocketIO();
+        };
+      
+      $(document).ready(function() {
+        $('#a').click(function() {
+						toggleVal = 0
+			iosocket.emit('buttonval',toggleVal);
+			
+	 });
+	});
+	$(document).ready(function() {
+        $('#b').click(function() {
+						toggleVal = 1
+			iosocket.emit('buttonval',toggleVal);
+			
+	 });
+	});
+	$(document).ready(function() {
+        $('#c').click(function() {
+						toggleVal = 2
+			iosocket.emit('buttonval',toggleVal);
+			
+	 });
+	});
+	$(document).ready(function() {
+        $('#d').click(function() {
+						toggleVal = 3
+			iosocket.emit('buttonval',toggleVal);
+			
+	 });
+	});
+	$(document).ready(function() {
+        $('#e').click(function() {
+						toggleVal = 4
+			iosocket.emit('buttonval',toggleVal);
+			
+	 });
+	});
+    </script>
+  </head>
+  <body>
+		<div id="sData">
+			<div id="btnHolder">
+				<table>
+					<caption><h1>Move RC CAR</h1></caption>
+					<tr>
+						<td colspan="2">
+							<input type="button" id="a" value="Forward"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<input type="button" id="b" value="Left"/>
+						</td>
+						<td>
+							<input type="button" id="c" value="Right"/>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2">
+							<input type="button" id="d" value="Backward"/>
+						</td>
+					</tr>
+					<tr></tr>
+					<tr>
+						<td colspan="2">
+							<input type="button" id="e" value="Stop"/>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>
